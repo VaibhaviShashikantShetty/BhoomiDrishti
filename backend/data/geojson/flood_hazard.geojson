@@ -1,0 +1,92 @@
+{
+  "type": "FeatureCollection",
+  "name": "CWC_Flood_Hazard_Atlas_Malaprabha",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_id": "FLD-01",
+        "zone_name": "Malaprabha River Core Inundation Zone (25-Yr Return)",
+        "risk_level": "High Flood Sensitivity",
+        "recurrence_years": 25,
+        "typical_depth_m": 2.4,
+        "drainage_basin": "Krishna Sub-Basin / Malaprabha",
+        "color": "#0284c7"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.96,
+              15.62
+            ],
+            [
+              75.01,
+              15.65
+            ],
+            [
+              75.05,
+              15.685
+            ],
+            [
+              75.045,
+              15.7
+            ],
+            [
+              74.995,
+              15.665
+            ],
+            [
+              74.95,
+              15.635
+            ],
+            [
+              74.96,
+              15.62
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_id": "FLD-02",
+        "zone_name": "Tributary Flash Drainage Depression",
+        "risk_level": "Moderate Seasonal Waterlogging",
+        "recurrence_years": 10,
+        "typical_depth_m": 0.9,
+        "drainage_basin": "Bennihalla Stream Confluence",
+        "color": "#38bdf8"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.92,
+              15.595
+            ],
+            [
+              74.945,
+              15.615
+            ],
+            [
+              74.935,
+              15.625
+            ],
+            [
+              74.91,
+              15.605
+            ],
+            [
+              74.92,
+              15.595
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
