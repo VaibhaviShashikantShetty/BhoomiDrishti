@@ -1,0 +1,121 @@
+{
+  "type": "FeatureCollection",
+  "name": "Census_Settlements_Belagavi_2021_Projected",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement_id": "VIL-01",
+        "name": "Mugatkhan Hubballi (MK Hubballi)",
+        "tier": "Large Gram Panchayat",
+        "population": 7820,
+        "households": 1540,
+        "predominant_livelihood": "Sugarcane farming & jaggery units",
+        "district": "Belagavi",
+        "taluk": "Bailhongal",
+        "primary_school_count": 3,
+        "health_subcentre": true,
+        "buffer_radius_m": 800
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.96,
+          15.638
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement_id": "VIL-02",
+        "name": "Deshnur Village",
+        "tier": "Medium Agricultural Village",
+        "population": 3410,
+        "households": 680,
+        "predominant_livelihood": "Paddy & dairy cooperative",
+        "district": "Belagavi",
+        "taluk": "Bailhongal",
+        "primary_school_count": 2,
+        "health_subcentre": false,
+        "buffer_radius_m": 600
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.012,
+          15.675
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement_id": "VIL-03",
+        "name": "Kittur Outskirts (Doddavad Cross)",
+        "tier": "Peri-urban Settlement",
+        "population": 5260,
+        "households": 1120,
+        "predominant_livelihood": "Horticulture & small business",
+        "district": "Belagavi",
+        "taluk": "Kittur",
+        "primary_school_count": 2,
+        "health_subcentre": true,
+        "buffer_radius_m": 700
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.902,
+          15.598
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement_id": "VIL-04",
+        "name": "Sampgaon Rural Cluster",
+        "tier": "Hamlets & Farmsteads",
+        "population": 2180,
+        "households": 420,
+        "predominant_livelihood": "Rainfed pulse farming",
+        "district": "Belagavi",
+        "taluk": "Bailhongal",
+        "primary_school_count": 1,
+        "health_subcentre": false,
+        "buffer_radius_m": 500
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.055,
+          15.722
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement_id": "VIL-05",
+        "name": "Kalloli Plateau Hamlet",
+        "tier": "Upland Agro-Pastoral Hamlet",
+        "population": 1150,
+        "households": 230,
+        "predominant_livelihood": "Goat rearing & dryland millet",
+        "district": "Belagavi",
+        "taluk": "Bailhongal",
+        "primary_school_count": 1,
+        "health_subcentre": false,
+        "buffer_radius_m": 450
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.94,
+          15.68
+        ]
+      }
+    }
+  ]
+}
