@@ -1,0 +1,19 @@
+# Sensitive and local generator files
+*.pdf
+BhoomiDrishti_Project_Report.pdf
+generate_pdf_report.py
+test_api.py
+create_commits.py
+.env
+*.db
+*.sqlite3
+*.sqlite
+
+# Cache and temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+.DS_Store
+.idea/
+.vscode/
