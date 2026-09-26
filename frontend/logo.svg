@@ -1,0 +1,36 @@
+<!-- BhoomiDrishti Official Logo SVG Snippet -->
+<svg class="brand-logo-svg" viewBox="0 0 100 100" width="42" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#15803d" />
+      <stop offset="50%" stop-color="#2e7d32" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="logoGradGold" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b45309" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+    <filter id="logoShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- Outer Protective Geodetic Ring -->
+  <circle cx="50" cy="50" r="45" stroke="url(#logoGradEmerald)" stroke-width="2.5" fill="#fcfbf9" filter="url(#logoShadow)" />
+  <circle cx="50" cy="50" r="41" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 2" />
+
+  <!-- Bhoomi: Stylized Land Parcel Lattice (Isometric Cadastral Grid) -->
+  <path d="M50 18 L76 33 L50 48 L24 33 Z" fill="url(#logoGradEmerald)" fill-opacity="0.15" stroke="url(#logoGradEmerald)" stroke-width="1.8" />
+  <path d="M24 33 L50 48 L50 78 L24 63 Z" fill="#dcfce7" fill-opacity="0.6" stroke="url(#logoGradEmerald)" stroke-width="1.8" />
+  <path d="M76 33 L50 48 L50 78 L76 63 Z" fill="#bbf7d0" fill-opacity="0.5" stroke="url(#logoGradEmerald)" stroke-width="1.8" />
+
+  <!-- Drishti: Concentric Iris of Vision & Evidence -->
+  <ellipse cx="50" cy="48" rx="20" ry="11" fill="#ffffff" stroke="url(#logoGradGold)" stroke-width="2" />
+  <circle cx="50" cy="48" r="6.5" fill="url(#logoGradEmerald)" />
+  <circle cx="48" cy="46" r="2" fill="#ffffff" />
+
+  <!-- Sprouting Leaf of Sustainable Governance -->
+  <path d="M50 42 C56 32 66 30 70 30 C70 36 66 44 56 46 Z" fill="url(#logoGradGold)" />
+  <circle cx="50" cy="50" r="47" stroke="#16a34a" stroke-width="1" stroke-opacity="0.2" />
+</svg>
