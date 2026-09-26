@@ -1,0 +1,121 @@
+/* ==========================================================================
+   BhoomiDrishti - Clean Light Policy Consequence Passport Styles
+   ========================================================================== */
+
+.passport-document-clean {
+  background: #ffffff;
+  color: #1f2937;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.pcp-clean-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #2e7d32;
+  padding-bottom: 10px;
+}
+
+.pcp-clean-title h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #2e7d32;
+  margin: 0;
+}
+
+.pcp-clean-title p {
+  font-size: 0.72rem;
+  color: #6b7280;
+  margin: 2px 0 0 0;
+}
+
+.pcp-clean-docid {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #b45309;
+  text-align: right;
+}
+
+.pcp-clean-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: #faf8f5;
+  border: 1px solid #e6e2d8;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.75rem;
+}
+
+.pcp-clean-grid div strong {
+  display: block;
+  font-size: 0.65rem;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.pcp-clean-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+.pcp-clean-table th {
+  background: #edf5ec;
+  color: #1f2937;
+  padding: 6px 10px;
+  text-align: left;
+  border: 1px solid #e6e2d8;
+  font-weight: 700;
+}
+
+.pcp-clean-table td {
+  padding: 6px 10px;
+  border: 1px solid #e6e2d8;
+  color: #374151;
+}
+
+.pcp-clean-sign-box {
+  background: #f0fdf4;
+  border: 1px dashed #86efac;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pcp-clean-hash {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #047857;
+  word-break: break-all;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #passport-dialog, #passport-dialog * {
+    visibility: visible;
+  }
+  #passport-dialog {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+  }
+  .dialog-top, .dialog-bottom {
+    display: none !important;
+  }
+}
