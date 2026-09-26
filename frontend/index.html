@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BhoomiDrishti — Team ThunderBolt</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/passport.css">
+</head>
+<body class="light-theme">
+
+  <!-- ============================================================ -->
+  <!-- 2-SECOND PREMIUM LOADING SCREEN (SLOW REVEAL)               -->
+  <!-- ============================================================ -->
+  <div id="splash-screen" class="splash-overlay">
+    <div class="splash-card">
+      <div class="splash-emblem">
+        <svg viewBox="0 0 100 100" class="splash-svg" fill="none">
+          <circle cx="50" cy="50" r="45" stroke="#2e7d32" stroke-width="2.5" fill="#fcfbf9"/>
+          <circle cx="50" cy="50" r="41" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 2" />
+          <path d="M50 18 L76 33 L50 48 L24 33 Z" fill="#2e7d32" fill-opacity="0.15" stroke="#2e7d32" stroke-width="1.8" />
+          <path d="M24 33 L50 48 L50 78 L24 63 Z" fill="#dcfce7" fill-opacity="0.6" stroke="#2e7d32" stroke-width="1.8" />
+          <path d="M76 33 L50 48 L50 78 L76 63 Z" fill="#bbf7d0" fill-opacity="0.5" stroke="#2e7d32" stroke-width="1.8" />
+          <ellipse cx="50" cy="48" rx="20" ry="11" fill="#ffffff" stroke="#f59e0b" stroke-width="2" />
+          <circle cx="50" cy="48" r="6.5" fill="#2e7d32" />
+          <circle cx="48" cy="46" r="2" fill="#ffffff" />
+          <path d="M50 42 C56 32 66 30 70 30 C70 36 66 44 56 46 Z" fill="#f59e0b" />
+        </svg>
+      </div>
+      <h1 class="splash-title">BhoomiDrishti</h1>
+      <div class="splash-team">Team ThunderBolt</div>
+      <p class="splash-sub">National Digital Platform for Land Governance</p>
+      <div class="splash-progress-track">
+        <div class="splash-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TOP APP HEADER                                               -->
+  <!-- ============================================================ -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="brand-logo-wrap">
+        <svg viewBox="0 0 100 100" class="brand-logo-img" fill="none">
+          <circle cx="50" cy="50" r="45" stroke="#2e7d32" stroke-width="2.5" fill="#fcfbf9"/>
+          <path d="M50 18 L76 33 L50 48 L24 33 Z" fill="#2e7d32" fill-opacity="0.15" stroke="#2e7d32" stroke-width="1.8" />
+          <path d="M24 33 L50 48 L50 78 L24 63 Z" fill="#dcfce7" fill-opacity="0.6" stroke="#2e7d32" stroke-width="1.8" />
+          <path d="M76 33 L50 48 L50 78 L76 63 Z" fill="#bbf7d0" fill-opacity="0.5" stroke="#2e7d32" stroke-width="1.8" />
+          <ellipse cx="50" cy="48" rx="20" ry="11" fill="#ffffff" stroke="#f59e0b" stroke-width="2" />
+          <circle cx="50" cy="48" r="6.5" fill="#2e7d32" />
+          <circle cx="48" cy="46" r="2" fill="#ffffff" />
+          <path d="M50 42 C56 32 66 30 70 30 C70 36 66 44 56 46 Z" fill="#f59e0b" />
+        </svg>
+      </div>
+      <div>
+        <div class="brand-row">
+          <span class="brand-text">BhoomiDrishti</span>
+          <span class="team-badge">Team ThunderBolt</span>
+        </div>
+        <span class="brand-tagline">National Land Governance & Decision Intelligence</span>
+      </div>
+    </div>
+
+    <!-- Operating Profile Switcher -->
+    <div class="role-switch-container">
+      <span class="role-prompt">Operating As:</span>
+      <div class="role-pills">
+        <button class="role-pill active" data-role="policymaker" onclick="switchUserRole('policymaker')">
+          <span class="role-emoji">🏛️</span>
+          <span>Policymaker</span>
+        </button>
+        <button class="role-pill" data-role="researcher" onclick="switchUserRole('researcher')">
+          <span class="role-emoji">🔬</span>
+          <span>Researcher</span>
+        </button>
+        <button class="role-pill" data-role="citizen" onclick="switchUserRole('citizen')">
+          <span class="role-emoji">🌾</span>
+          <span>Citizen & Farmer</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- MAIN USER WORKSPACE WITH SIDE NAVIGATION                     -->
+  <!-- ============================================================ -->
+  <main class="app-body">
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- 1. POLICYMAKER WORKSPACE                                     -->
+    <!-- ------------------------------------------------------------ -->
+    <section class="role-view active" id="view-policymaker">
+      
+      <!-- Side Navigation Panel -->
+      <aside class="sub-nav-rail">
+        <div class="rail-header">POLICYMAKER</div>
+        <button class="rail-btn active" data-target="pm-tab-routes" onclick="switchSubTab('policymaker', 'pm-tab-routes', this)">
+          <span class="rail-icon">🗺️</span>
+          <span class="rail-text">Alignment Analysis</span>
+        </button>
+        <button class="rail-btn" data-target="pm-tab-passport" onclick="switchSubTab('policymaker', 'pm-tab-passport', this)">
+          <span class="rail-icon">📜</span>
+          <span class="rail-text">Decision Passport</span>
+        </button>
+        <button class="rail-btn" data-target="pm-tab-lineage" onclick="switchSubTab('policymaker', 'pm-tab-lineage', this)">
+          <span class="rail-icon">🔍</span>
+          <span class="rail-text">Evidence Lineage</span>
+        </button>
+      </aside>
+
+      <!-- Main Full-Screen Content Area -->
+      <div class="sub-content-stage">
+        
+        <!-- Tab 1: Alignment Analysis (Full-Screen Satellite Map & Floating Dashboard) -->
+        <div class="sub-view-pane active" id="pm-tab-routes">
+          <div class="fullscreen-map-wrapper">
+            
+            <div id="map-policymaker" class="gis-map-canvas"></div>
+
+            <!-- Floating Top Route Control -->
+            <div class="floating-top-bar">
+              <div class="corridor-title-pill">
+                <strong>NH-753G Malaprabha Agro-Economic Corridor</strong>
+                <span class="state-label">Karnataka • Belagavi to Dharwad</span>
+              </div>
+
+              <div class="route-selector-group">
+                <button class="route-pill active-a" id="btn-route-a" onclick="selectRoute('A')">
+                  <span class="dot-red"></span> Route A: Direct (34.8 km)
+                </button>
+                <button class="route-pill" id="btn-route-b" onclick="selectRoute('B')">
+                  <span class="dot-green"></span> Route B: Shifted Bypass (38.6 km)
+                </button>
+              </div>
+
+              <!-- Basemap Satellite Switcher -->
+              <div class="map-style-toggle">
+                <button class="basemap-pill active" id="btn-satellite-pm" onclick="setBasemap('satellite', 'pm')">🛰️ Satellite GIS</button>
+                <button class="basemap-pill" id="btn-street-pm" onclick="setBasemap('street', 'pm')">🗺️ Street Map</button>
+              </div>
+            </div>
+
+            <!-- Floating Bottom-Right Impact Metrics HUD -->
+            <div class="floating-metrics-hud">
+              <div class="hud-header">
+                <span>IMPACT ASSESSMENT</span>
+                <span class="hud-badge" id="hud-scenario-badge">Analyzing Route A</span>
+              </div>
+
+              <div class="hud-grid">
+                <div class="hud-metric">
+                  <span class="hud-label">Farmland Touched</span>
+                  <span class="hud-val" id="val-agri">138 ha</span>
+                  <span class="hud-sub text-alert" id="diff-agri">High cropland loss</span>
+                </div>
+                <div class="hud-metric">
+                  <span class="hud-label">Flood Zone Crossed</span>
+                  <span class="hud-val text-alert" id="val-flood">95 ha</span>
+                  <span class="hud-sub text-alert" id="diff-flood">25-Yr Inundation</span>
+                </div>
+                <div class="hud-metric">
+                  <span class="hud-label">Displaced Homes</span>
+                  <span class="hud-val" id="val-homes">~42 Families</span>
+                  <span class="hud-sub" id="diff-homes">MK Hubballi & Deshnur</span>
+                </div>
+              </div>
+
+              <div class="hud-footer">
+                <p id="decision-tradeoff-text">
+                  Route A cuts across 110 ha of high-yield sugarcane/paddy fields and traverses the Malaprabha river flood retention basin.
+                </p>
+                <div class="hud-btn-row">
+                  <button class="btn btn-sm btn-emerald" onclick="switchSubTab('policymaker', 'pm-tab-passport')">
+                    Open Decision Passport →
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Tab 2: Policy Consequence Passport (Full View) -->
+        <div class="sub-view-pane" id="pm-tab-passport">
+          <div class="passport-full-stage">
+            <div class="stage-header">
+              <div>
+                <h2>Policy Consequence Passport</h2>
+                <p>Official Statutory Decision Brief & Certified Impact Record</p>
+              </div>
+              <div class="stage-actions">
+                <button class="btn btn-beige" onclick="window.print()">🖨️ Print / Save PDF</button>
+                <button class="btn btn-emerald" onclick="confirmPassportSign()">Digitally Sign & Record</button>
+              </div>
+            </div>
+            
+            <div class="passport-paper-sheet" id="passport-content">
+              <!-- Rendered by passport.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Evidence Lineage (Full View) -->
+        <div class="sub-view-pane" id="pm-tab-lineage">
+          <div class="lineage-full-stage">
+            <div class="stage-header">
+              <div>
+                <h2>Evidence Lineage & Provenance</h2>
+                <p>Inspect the authoritative datasets, calculation equations, and empirical confidence for all indicators.</p>
+              </div>
+            </div>
+
+            <div class="lineage-cards-grid">
+              <div class="lineage-box">
+                <div class="lineage-tag">DERIVED GEOSPATIAL INDICATOR</div>
+                <h3>Agricultural Cropland Footprint (138 ha vs 27 ha)</h3>
+                <p><strong>Primary Source:</strong> ISRO Bhuvan NRSC LULC 1:10,000 Multi-spectral Cadastral Layer (2024-25 Sentinel-2 / LISS-IV).</p>
+                <p><strong>Calculation Formula:</strong> <code>Shapely ST_Intersection(ST_Buffer(corridor_line, 30m), lulc_agriculture_polygons)</code> in EPSG:32643 UTM metric projection.</p>
+                <p><strong>Limitations:</strong> Cadastral field boundary variance ±2.5m from satellite ortho-rectification.</p>
+                <div class="confidence-badge">✓ 93% Empirical Confidence</div>
+              </div>
+
+              <div class="lineage-box">
+                <div class="lineage-tag">OBSERVED & DERIVED INDICATOR</div>
+                <h3>Flood Inundation Exposure (95 ha vs 0 ha)</h3>
+                <p><strong>Primary Source:</strong> Central Water Commission (CWC) Malaprabha Basin Flood Hazard Atlas (2023 Hydraulic Re-modelling).</p>
+                <p><strong>Calculation Formula:</strong> Geometric overlay of HEC-RAS 2D 25-year flood inundation polygon with corridor Right-of-Way buffer.</p>
+                <p><strong>Limitations:</strong> Modelled on 2019 discharge peak (48,000 cusecs); extreme climate flash events could widen inundation fringe by 12%.</p>
+                <div class="confidence-badge">✓ 91% Empirical Confidence</div>
+              </div>
+
+              <div class="lineage-box">
+                <div class="lineage-tag">ESTIMATED SOCIO-ECONOMIC MODEL</div>
+                <h3>Settlement Relocation & Land Compensation</h3>
+                <p><strong>Primary Source:</strong> Census of India 2021 Projected Habitations + Karnataka PWD Schedule of Rates 2025-26.</p>
+                <p><strong>Calculation Formula:</strong> <code>Formula: (Agri_ha × CircleRate × 2.0 RFCTLARR multiplier) + Civil_Earthwork</code>.</p>
+                <p><strong>Limitations:</strong> Excludes litigation contingencies and micro-level utility shifting (BESCOM HT lines).</p>
+                <div class="confidence-badge">✓ 88% Empirical Confidence</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- 2. RESEARCHER WORKSPACE                                      -->
+    <!-- ------------------------------------------------------------ -->
+    <section class="role-view" id="view-researcher">
+      
+      <!-- Side Navigation Panel -->
+      <aside class="sub-nav-rail">
+        <div class="rail-header">RESEARCH LAB</div>
+        <button class="rail-btn active" data-target="res-tab-explore" onclick="switchSubTab('researcher', 'res-tab-explore', this)">
+          <span class="rail-icon">📚</span>
+          <span class="rail-text">Evidence Explorer</span>
+        </button>
+        <button class="rail-btn" data-target="res-tab-publish" onclick="switchSubTab('researcher', 'res-tab-publish', this)">
+          <span class="rail-icon">✍️</span>
+          <span class="rail-text">Publish Finding</span>
+        </button>
+      </aside>
+
+      <div class="sub-content-stage">
+        
+        <!-- Tab 1: Evidence Explorer (Full Width) -->
+        <div class="sub-view-pane active" id="res-tab-explore">
+          <div class="research-full-stage">
+            <div class="stage-header">
+              <div>
+                <h2>Evidence Explorer</h2>
+                <p>Search peer-reviewed research papers and empirical studies connected to land policy.</p>
+              </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar-clean">
+              <input type="text" id="research-search-box" placeholder="Search papers: e.g. flooding risk, sugarcane severance, Krishna basin..." onkeyup="if(event.key==='Enter') doSearchResearch()">
+              <button class="btn btn-emerald" onclick="doSearchResearch()">Search Evidence</button>
+            </div>
+
+            <!-- Research Cards -->
+            <div class="research-cards-grid" id="research-card-container">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Publish Finding (Full Width Focused Studio) -->
+        <div class="sub-view-pane" id="res-tab-publish">
+          <div class="publish-full-stage">
+            <div class="stage-header">
+              <div>
+                <h2>Publish a Research Finding</h2>
+                <p>When you publish, your research is automatically indexed and discoverable by policymakers evaluating infrastructure proposals.</p>
+              </div>
+            </div>
+
+            <form class="clean-form-card" id="simple-publish-form" onsubmit="handleQuickPublish(event)">
+              <div class="form-row">
+                <div class="field-wrap">
+                  <label>Research Paper / Finding Title:</label>
+                  <input type="text" id="pub-title" required placeholder="e.g. Subsurface Drainage Disruption in Alluvial Corridors">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field-wrap">
+                  <label>Core Empirical Statement (What did the data prove?):</label>
+                  <textarea id="pub-statement" rows="3" required placeholder="Describe the empirical finding in 2-3 clear sentences..."></textarea>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="field-wrap">
+                  <label>Lead Author & Institution:</label>
+                  <input type="text" id="pub-author" required placeholder="e.g. Dr. Preeti Deshpande, IIT Dharwad">
+                </div>
+                <div class="field-wrap">
+                  <label>Primary Datasets Used:</label>
+                  <input type="text" id="pub-dataset" required placeholder="e.g. CGWB Piezometer Network & Sentinel-2 NDWI">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field-wrap">
+                  <label>Recommended Policy Guidance for Government Officers:</label>
+                  <textarea id="pub-policy" rows="2" required placeholder="What should the highway committee do based on your research?"></textarea>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-emerald">Publish to National Repository</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- 3. CITIZEN & FARMER WORKSPACE                                -->
+    <!-- ------------------------------------------------------------ -->
+    <section class="role-view" id="view-citizen">
+      
+      <!-- Side Navigation Panel -->
+      <aside class="sub-nav-rail">
+        <div class="rail-header">COMMUNITY PORTAL</div>
+        <button class="rail-btn active" data-target="cit-tab-land" onclick="switchSubTab('citizen', 'cit-tab-land', this)">
+          <span class="rail-icon">🌾</span>
+          <span class="rail-text">My Land & Village</span>
+        </button>
+        <button class="rail-btn" data-target="cit-tab-feedback" onclick="switchSubTab('citizen', 'cit-tab-feedback', this)">
+          <span class="rail-icon">📍</span>
+          <span class="rail-text">Submit Concern</span>
+        </button>
+        <button class="rail-btn" data-target="cit-tab-feed" onclick="switchSubTab('citizen', 'cit-tab-feed', this)">
+          <span class="rail-icon">📢</span>
+          <span class="rail-text">Community Feed</span>
+        </button>
+      </aside>
+
+      <div class="sub-content-stage">
+        
+        <!-- Tab 1: My Land & Village Impact (Rich Cadastral Details + Satellite Map) -->
+        <div class="sub-view-pane active" id="cit-tab-land">
+          <div class="citizen-layout-split">
+            
+            <!-- Left: Citizen Satellite Map -->
+            <div class="citizen-map-column">
+              <div class="card-bar">
+                <span class="card-title">Highway Alignment Satellite View</span>
+                <div class="map-style-toggle">
+                  <button class="basemap-pill active" id="btn-satellite-cit" onclick="setBasemap('satellite', 'cit')">🛰️ Satellite</button>
+                  <button class="basemap-pill" id="btn-street-cit" onclick="setBasemap('street', 'cit')">🗺️ Street</button>
+                </div>
+              </div>
+              <div id="map-citizen" class="map-frame"></div>
+            </div>
+
+            <!-- Right: Rich Land Parcel & Village Inspector -->
+            <div class="citizen-details-column">
+              
+              <!-- Parcel Selector -->
+              <div class="parcel-card">
+                <span class="tag-emerald">CADASTRAL LAND PARCEL INSPECTOR</span>
+                <h3>Select Your Land Parcel / Village</h3>
+                <p class="text-sm-muted">Choose your survey number to see complete ownership, crop, canal, and compensation details.</p>
+
+                <select id="citizen-parcel-select" class="clean-select" onchange="onSelectParcel(this.value)">
+                  <option value="PARCEL-101" selected>Sy. No. 142/2A — Basappa Ningappa Patil (MK Hubballi)</option>
+                  <option value="PARCEL-102">Sy. No. 88/B — Ramesh Talwar (Deshnur Village)</option>
+                  <option value="PARCEL-103">Sy. No. 45/1 — Shivanand Gowda (Kittur Outskirts)</option>
+                  <option value="PARCEL-104">Sy. No. 112/3 — Parvati Bai Patil (Sampgaon Cluster)</option>
+                  <option value="PARCEL-105">Sy. No. 71/C — Mallikarjunappa (Kalloli Plateau)</option>
+                </select>
+
+                <!-- Detailed Land Parcel Card -->
+                <div class="parcel-details-box" id="parcel-details-display">
+                  <!-- Rendered dynamically by citizen.js -->
+                </div>
+
+                <button class="btn btn-emerald full-btn" onclick="flagParcelConcern()">
+                  📍 Report an Issue with My Parcel →
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Tab 2: Submit Ground Concern (Full View Form) -->
+        <div class="sub-view-pane" id="cit-tab-feedback">
+          <div class="feedback-full-stage">
+            <div class="stage-header">
+              <div>
+                <h2>Share a Ground Concern or Observation</h2>
+                <p>Your feedback will be registered as <em>Reported by Citizen - Unverified Ground Observation</em> and sent directly to the Highway Committee.</p>
+              </div>
+            </div>
+
+            <form class="clean-form-card" onsubmit="submitCitizenConcern(event)">
+              <div class="form-grid-2">
+                <div class="field-wrap">
+                  <label>Your Name / Farmer Name:</label>
+                  <input type="text" id="c-name" required placeholder="e.g. Basappa Ningappa Patil">
+                </div>
+                <div class="field-wrap">
+                  <label>Village Name & Survey Number:</label>
+                  <input type="text" id="c-village" required placeholder="e.g. Mugatkhan Hubballi (Sy. No. 142/2A)">
+                </div>
+              </div>
+
+              <div class="field-wrap">
+                <label>Observation Category:</label>
+                <select id="c-category" class="clean-select">
+                  <option value="Flooding Observed">Severe Monsoon Flooding Observed on Ground</option>
+                  <option value="Agricultural Severance">Irrigation Canal / Field Severance</option>
+                  <option value="Road Access Problem">Tractor & Cattle Access Road Cut Off</option>
+                  <option value="School / Health Centre Proximity">School / Health Centre Nearby</option>
+                  <option value="Other Observation">Other Local Ground Issue</option>
+                </select>
+              </div>
+
+              <div class="field-wrap">
+                <label>Detailed Description of Ground Reality:</label>
+                <textarea id="c-desc" rows="4" required placeholder="Explain what happens on this land during heavy rains, where the water canal runs, or how tractor movement will be impacted..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-emerald">Submit to Highway Committee</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Tab 3: Community Observations Feed (Full View) -->
+        <div class="sub-view-pane" id="cit-tab-feed">
+          <div class="feed-full-stage">
+            <div class="stage-header">
+              <div>
+                <h2>Community Observations Feed</h2>
+                <p>Public record of ground feedback submitted by local farmers and panchayats along the corridor.</p>
+              </div>
+            </div>
+
+            <div class="community-feed-grid" id="citizen-mini-feed">
+              <!-- Rendered by citizen.js -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-box" class="toast-box"></div>
+
+  <!-- Leaflet Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- App Scripts -->
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/map.js"></script>
+  <script src="/static/js/policymaker.js"></script>
+  <script src="/static/js/researcher.js"></script>
+  <script src="/static/js/citizen.js"></script>
+  <script src="/static/js/passport.js"></script>
+
+</body>
+</html>
