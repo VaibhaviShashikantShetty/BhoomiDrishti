@@ -1,0 +1,190 @@
+{
+  "type": "FeatureCollection",
+  "name": "NRSC_Bhuvan_LULC_Malaprabha_Basin_2024",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "lulc_id": "LULC-01",
+        "category": "Prime Agricultural Land (Double Crop)",
+        "classification": "Agriculture",
+        "crop_type": "Sugarcane & Wet Paddy",
+        "soil_type": "Deep Black Alluvial Clay",
+        "economic_yield_inr_ha_yr": 285000,
+        "color": "#16a34a",
+        "density": "High Intensity"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.91,
+              15.59
+            ],
+            [
+              74.98,
+              15.61
+            ],
+            [
+              75.02,
+              15.65
+            ],
+            [
+              75.06,
+              15.68
+            ],
+            [
+              75.05,
+              15.71
+            ],
+            [
+              74.99,
+              15.67
+            ],
+            [
+              74.93,
+              15.64
+            ],
+            [
+              74.91,
+              15.59
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lulc_id": "LULC-02",
+        "category": "Rainfed Cropland (Single Crop)",
+        "classification": "Agriculture",
+        "crop_type": "Sorghum & Groundnut",
+        "soil_type": "Medium Black / Red Loam",
+        "economic_yield_inr_ha_yr": 85000,
+        "color": "#84cc16",
+        "density": "Moderate"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.87,
+              15.57
+            ],
+            [
+              74.92,
+              15.565
+            ],
+            [
+              74.94,
+              15.605
+            ],
+            [
+              74.9,
+              15.62
+            ],
+            [
+              74.87,
+              15.57
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lulc_id": "LULC-03",
+        "category": "Scrubland & Stony Pediment",
+        "classification": "Wasteland / Non-Arable",
+        "crop_type": "None (Sparse thorny scrub)",
+        "soil_type": "Shallow Gravelly Lithosol",
+        "economic_yield_inr_ha_yr": 12000,
+        "color": "#eab308",
+        "density": "Sparse"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.905,
+              15.63
+            ],
+            [
+              74.96,
+              15.68
+            ],
+            [
+              75.01,
+              15.73
+            ],
+            [
+              75.06,
+              15.745
+            ],
+            [
+              75.08,
+              15.73
+            ],
+            [
+              75.02,
+              15.71
+            ],
+            [
+              74.95,
+              15.66
+            ],
+            [
+              74.905,
+              15.63
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lulc_id": "LULC-04",
+        "category": "Community Agro-Forestry / Grove",
+        "classification": "Ecology & Commons",
+        "crop_type": "Tamarind, Neem & Bamboo Groves",
+        "soil_type": "Red Sandy Loam",
+        "economic_yield_inr_ha_yr": 45000,
+        "color": "#059669",
+        "density": "Medium Tree Cover"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              75.06,
+              15.7
+            ],
+            [
+              75.1,
+              15.71
+            ],
+            [
+              75.12,
+              15.74
+            ],
+            [
+              75.09,
+              15.75
+            ],
+            [
+              75.06,
+              15.7
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
