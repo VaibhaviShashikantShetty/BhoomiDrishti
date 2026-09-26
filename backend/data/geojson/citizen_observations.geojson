@@ -1,0 +1,52 @@
+{
+  "type": "FeatureCollection",
+  "name": "Citizen_Ground_Observations_Public_Feed",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "obs_id": "OBS-101",
+        "citizen_name": "Basappa Patil (Farmer, MK Hubballi)",
+        "category": "Flooding Observed",
+        "title": "Severe backwater flooding during 2023 monsoon submerged existing culvert",
+        "description": "The proposed low alignment crosses our main lift irrigation canal. In 2019 and 2023, water stood 6 feet deep here for 18 days. Any embankment without wide viaducts will create an artificial dam and flood 400 acres of cane.",
+        "survey_number": "Sy. No. 142/2A",
+        "village": "Mugatkhan Hubballi",
+        "verification_status": "Reported by Citizen - Unverified Ground Observation",
+        "verified_by_officer": false,
+        "timestamp": "2026-08-14 09:30:00",
+        "affected_families_claim": 42
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.975,
+          15.645
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "obs_id": "OBS-102",
+        "citizen_name": "Gram Panchayat Bailhongal (Ramesh Talwar, Member)",
+        "category": "Agricultural Severance",
+        "title": "Corridor bisects centuries-old gravity water channel to Deshnur tank",
+        "description": "If Scenario A is selected, farmers on the southern flank will lose direct tractor access to their sugarcane weighing centers and the Kittur APMC yard. Please evaluate the northern ridge alternative.",
+        "survey_number": "Sy. No. 88/B",
+        "village": "Deshnur",
+        "verification_status": "Reported by Citizen - Unverified Ground Observation",
+        "verified_by_officer": false,
+        "timestamp": "2026-08-20 16:15:00",
+        "affected_families_claim": 65
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.008,
+          15.67
+        ]
+      }
+    }
+  ]
+}
