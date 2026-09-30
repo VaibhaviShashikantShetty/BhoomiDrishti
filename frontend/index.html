@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>BhoomiDrishti — Team ThunderBolt</title>
   
   <!-- Fonts -->
@@ -20,7 +20,7 @@
 <body class="light-theme">
 
   <!-- ============================================================ -->
-  <!-- 2-SECOND PREMIUM LOADING SCREEN (SLOW REVEAL)               -->
+  <!-- 2-SECOND LUXURY LOADING SCREEN (DEEP BLACK TO IVORY/WHITE)   -->
   <!-- ============================================================ -->
   <div id="splash-screen" class="splash-overlay">
     <div class="splash-card">
@@ -106,8 +106,8 @@
       <aside class="sub-nav-rail">
         <div class="rail-header">POLICYMAKER</div>
         <button class="rail-btn active" data-target="pm-tab-routes" onclick="switchSubTab('policymaker', 'pm-tab-routes', this)">
-          <span class="rail-icon">🗺️</span>
-          <span class="rail-text">Alignment Analysis</span>
+          <span class="rail-icon">🎛️</span>
+          <span class="rail-text">Simulation & Map</span>
         </button>
         <button class="rail-btn" data-target="pm-tab-passport" onclick="switchSubTab('policymaker', 'pm-tab-passport', this)">
           <span class="rail-icon">📜</span>
@@ -122,7 +122,7 @@
       <!-- Main Full-Screen Content Area -->
       <div class="sub-content-stage">
         
-        <!-- Tab 1: Alignment Analysis (Full-Screen Satellite Map & Floating Dashboard) -->
+        <!-- Tab 1: Alignment Analysis & Live Policy Simulation Deck -->
         <div class="sub-view-pane active" id="pm-tab-routes">
           <div class="fullscreen-map-wrapper">
             
@@ -151,41 +151,108 @@
               </div>
             </div>
 
-            <!-- Floating Bottom-Right Impact Metrics HUD -->
-            <div class="floating-metrics-hud">
-              <div class="hud-header">
-                <span>IMPACT ASSESSMENT</span>
-                <span class="hud-badge" id="hud-scenario-badge">Analyzing Route A</span>
+            <!-- Floating Interactive Policy Simulation Deck -->
+            <div class="floating-sim-deck" id="policy-sim-deck">
+              <div class="sim-deck-header">
+                <div class="sim-title-group">
+                  <span class="sim-deck-badge">POLICY ENGINE</span>
+                  <h4>Interactive Action Simulation</h4>
+                </div>
+                <button class="sim-reset-btn" onclick="resetSimulationParameters()" title="Reset to baseline">↺ Reset</button>
               </div>
 
-              <div class="hud-grid">
-                <div class="hud-metric">
-                  <span class="hud-label">Farmland Touched</span>
-                  <span class="hud-val" id="val-agri">138 ha</span>
-                  <span class="hud-sub text-alert" id="diff-agri">High cropland loss</span>
+              <!-- Sliders Grid -->
+              <div class="sim-sliders-container">
+                
+                <!-- Parameter 1: RoW Buffer Width -->
+                <div class="sim-slider-row">
+                  <div class="sim-label-row">
+                    <span class="sim-param-name">Right-of-Way Buffer Width</span>
+                    <span class="sim-param-val" id="disp-buffer-val">60 m</span>
+                  </div>
+                  <input type="range" class="sim-range" id="sim-buffer" min="30" max="120" step="5" value="60" oninput="onSimParamChange()">
+                  <span class="sim-param-hint">Statutory corridor width (affects metric polygon area in UTM 43N)</span>
                 </div>
-                <div class="hud-metric">
-                  <span class="hud-label">Flood Zone Crossed</span>
-                  <span class="hud-val text-alert" id="val-flood">95 ha</span>
-                  <span class="hud-sub text-alert" id="diff-flood">25-Yr Inundation</span>
+
+                <!-- Parameter 2: Elevated Viaduct Percentage -->
+                <div class="sim-slider-row">
+                  <div class="sim-label-row">
+                    <span class="sim-param-name">Elevated Viaduct / Bridge Ratio</span>
+                    <span class="sim-param-val" id="disp-viaduct-val">0 %</span>
+                  </div>
+                  <input type="range" class="sim-range" id="sim-viaduct" min="0" max="50" step="5" value="0" oninput="onSimParamChange()">
+                  <span class="sim-param-hint">Elevates road to maintain canal flow and avoid flood damming</span>
                 </div>
-                <div class="hud-metric">
-                  <span class="hud-label">Displaced Homes</span>
-                  <span class="hud-val" id="val-homes">~42 Families</span>
-                  <span class="hud-sub" id="diff-homes">MK Hubballi & Deshnur</span>
+
+                <!-- Parameter 3: River Floodplain Setback -->
+                <div class="sim-slider-row">
+                  <div class="sim-label-row">
+                    <span class="sim-param-name">River Floodplain Setback</span>
+                    <span class="sim-param-val" id="disp-setback-val">0 m</span>
+                  </div>
+                  <input type="range" class="sim-range" id="sim-setback" min="0" max="600" step="50" value="0" oninput="onSimParamChange()">
+                  <span class="sim-param-hint">Lateral clearance from CWC 25-year flood inundation basin</span>
+                </div>
+
+                <!-- Parameter 4: Compensation Multiplier -->
+                <div class="sim-slider-row">
+                  <div class="sim-label-row">
+                    <span class="sim-param-name">Land Compensation Multiplier</span>
+                    <span class="sim-param-val" id="disp-comp-val">2.0 x Circle Rate</span>
+                  </div>
+                  <input type="range" class="sim-range" id="sim-comp" min="1.0" max="3.0" step="0.1" value="2.0" oninput="onSimParamChange()">
+                  <span class="sim-param-hint">RFCTLARR 2013 statutory compensation factor for rural parcels</span>
+                </div>
+
+              </div>
+
+              <!-- Live Simulated Impact Metrics HUD -->
+              <div class="sim-results-hud">
+                <div class="hud-header">
+                  <span>SIMULATION IMPACT HUD</span>
+                  <span class="hud-badge" id="hud-scenario-badge">Analyzing Route A</span>
+                </div>
+
+                <div class="hud-grid">
+                  <div class="hud-metric">
+                    <span class="hud-label">Farmland Touched</span>
+                    <span class="hud-val" id="val-agri">138.0 ha</span>
+                    <span class="hud-sub text-alert" id="diff-agri">Prime: 110.0 ha</span>
+                  </div>
+                  <div class="hud-metric">
+                    <span class="hud-label">Flood Inundation</span>
+                    <span class="hud-val text-alert" id="val-flood">95.0 ha</span>
+                    <span class="hud-sub text-alert" id="diff-flood">25-Yr Basin</span>
+                  </div>
+                  <div class="hud-metric">
+                    <span class="hud-label">Displaced Homes</span>
+                    <span class="hud-val" id="val-homes">~42 Families</span>
+                    <span class="hud-sub" id="diff-homes">2 Habitations</span>
+                  </div>
+                  <div class="hud-metric">
+                    <span class="hud-label">Total Est. Outlay</span>
+                    <span class="hud-val" id="val-total-cost">₹ 532.5 Cr</span>
+                    <span class="hud-sub" id="diff-cost">Land: ₹ 162.5 Cr</span>
+                  </div>
+                  <div class="hud-metric">
+                    <span class="hud-label">Composite Risk</span>
+                    <span class="hud-val" id="val-risk-score">82 / 100</span>
+                    <span class="hud-sub text-alert" id="diff-risk">High Risk</span>
+                  </div>
+                </div>
+
+                <div class="hud-footer">
+                  <p id="decision-tradeoff-text">
+                    Adjust the sliders above to simulate real-time adjustments in RoW width, viaduct structures, and floodplain setbacks.
+                  </p>
+                  <div class="hud-btn-row">
+                    <button class="btn btn-sm btn-emerald" onclick="switchSubTab('policymaker', 'pm-tab-passport')">
+                      Open Certified Passport →
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div class="hud-footer">
-                <p id="decision-tradeoff-text">
-                  Route A cuts across 110 ha of high-yield sugarcane/paddy fields and traverses the Malaprabha river flood retention basin.
-                </p>
-                <div class="hud-btn-row">
-                  <button class="btn btn-sm btn-emerald" onclick="switchSubTab('policymaker', 'pm-tab-passport')">
-                    Open Decision Passport →
-                  </button>
-                </div>
-              </div>
             </div>
 
           </div>
@@ -224,27 +291,27 @@
             <div class="lineage-cards-grid">
               <div class="lineage-box">
                 <div class="lineage-tag">DERIVED GEOSPATIAL INDICATOR</div>
-                <h3>Agricultural Cropland Footprint (138 ha vs 27 ha)</h3>
+                <h3>Agricultural Cropland Footprint</h3>
                 <p><strong>Primary Source:</strong> ISRO Bhuvan NRSC LULC 1:10,000 Multi-spectral Cadastral Layer (2024-25 Sentinel-2 / LISS-IV).</p>
-                <p><strong>Calculation Formula:</strong> <code>Shapely ST_Intersection(ST_Buffer(corridor_line, 30m), lulc_agriculture_polygons)</code> in EPSG:32643 UTM metric projection.</p>
+                <p><strong>Calculation Formula:</strong> <code>Shapely ST_Intersection(ST_Buffer(corridor_line, buffer_meters/2), lulc_agriculture_polygons)</code> in EPSG:32643 UTM metric projection.</p>
                 <p><strong>Limitations:</strong> Cadastral field boundary variance ±2.5m from satellite ortho-rectification.</p>
                 <div class="confidence-badge">✓ 93% Empirical Confidence</div>
               </div>
 
               <div class="lineage-box">
                 <div class="lineage-tag">OBSERVED & DERIVED INDICATOR</div>
-                <h3>Flood Inundation Exposure (95 ha vs 0 ha)</h3>
+                <h3>Flood Inundation Exposure</h3>
                 <p><strong>Primary Source:</strong> Central Water Commission (CWC) Malaprabha Basin Flood Hazard Atlas (2023 Hydraulic Re-modelling).</p>
-                <p><strong>Calculation Formula:</strong> Geometric overlay of HEC-RAS 2D 25-year flood inundation polygon with corridor Right-of-Way buffer.</p>
+                <p><strong>Calculation Formula:</strong> Geometric overlay of HEC-RAS 2D 25-year flood inundation polygon with corridor Right-of-Way buffer, adjusted for simulated lateral setback.</p>
                 <p><strong>Limitations:</strong> Modelled on 2019 discharge peak (48,000 cusecs); extreme climate flash events could widen inundation fringe by 12%.</p>
                 <div class="confidence-badge">✓ 91% Empirical Confidence</div>
               </div>
 
               <div class="lineage-box">
                 <div class="lineage-tag">ESTIMATED SOCIO-ECONOMIC MODEL</div>
-                <h3>Settlement Relocation & Land Compensation</h3>
+                <h3>Settlement Relocation & Land Compensation Outlay</h3>
                 <p><strong>Primary Source:</strong> Census of India 2021 Projected Habitations + Karnataka PWD Schedule of Rates 2025-26.</p>
-                <p><strong>Calculation Formula:</strong> <code>Formula: (Agri_ha × CircleRate × 2.0 RFCTLARR multiplier) + Civil_Earthwork</code>.</p>
+                <p><strong>Calculation Formula:</strong> <code>Formula: (Agri_ha × CircleRate × compensation_multiplier RFCTLARR) + Base_Civil + Viaduct_Addon</code>.</p>
                 <p><strong>Limitations:</strong> Excludes litigation contingencies and micro-level utility shifting (BESCOM HT lines).</p>
                 <div class="confidence-badge">✓ 88% Empirical Confidence</div>
               </div>
@@ -268,6 +335,10 @@
           <span class="rail-icon">📚</span>
           <span class="rail-text">Evidence Explorer</span>
         </button>
+        <button class="rail-btn" data-target="res-tab-correlation" onclick="switchSubTab('researcher', 'res-tab-correlation', this)">
+          <span class="rail-icon">🔬</span>
+          <span class="rail-text">Cross-Dataset Correlation</span>
+        </button>
         <button class="rail-btn" data-target="res-tab-publish" onclick="switchSubTab('researcher', 'res-tab-publish', this)">
           <span class="rail-icon">✍️</span>
           <span class="rail-text">Publish Finding</span>
@@ -276,7 +347,7 @@
 
       <div class="sub-content-stage">
         
-        <!-- Tab 1: Evidence Explorer (Full Width) -->
+        <!-- Tab 1: Evidence Explorer -->
         <div class="sub-view-pane active" id="res-tab-explore">
           <div class="research-full-stage">
             <div class="stage-header">
@@ -294,12 +365,68 @@
 
             <!-- Research Cards -->
             <div class="research-cards-grid" id="research-card-container">
-              <!-- Rendered by JS -->
+              <!-- Rendered by researcher.js -->
             </div>
           </div>
         </div>
 
-        <!-- Tab 2: Publish Finding (Full Width Focused Studio) -->
+        <!-- Tab 2: Spatial Cross-Dataset Correlation Tool (New Feature!) -->
+        <div class="sub-view-pane" id="res-tab-correlation">
+          <div class="research-full-stage">
+            <div class="stage-header">
+              <div>
+                <h2>Spatial Cross-Dataset Correlation & Overlap Explorer</h2>
+                <p>Compute empirical geometric intersection, Jaccard similarity index, and policy co-occurrence between authoritative datasets.</p>
+              </div>
+            </div>
+
+            <!-- Interactive Dataset Correlation Workbench -->
+            <div class="correlation-workbench-card">
+              <div class="correlation-selectors-row">
+                <div class="field-wrap">
+                  <label>Primary Layer (Layer A):</label>
+                  <select id="corr-layer-a" class="clean-select" onchange="runDatasetCorrelation()">
+                    <option value="land_use" selected>ISRO Bhuvan LULC (Agricultural Parcels)</option>
+                    <option value="flood_hazard">CWC Malaprabha Flood Inundation Hazard</option>
+                    <option value="settlements">Census 2021 Habitations & Settlements</option>
+                    <option value="scenario_a">Route A: Direct Corridor Line</option>
+                    <option value="scenario_b">Route B: Shifted Bypass Line</option>
+                  </select>
+                </div>
+                <div class="field-wrap">
+                  <label>Secondary Layer (Layer B):</label>
+                  <select id="corr-layer-b" class="clean-select" onchange="runDatasetCorrelation()">
+                    <option value="flood_hazard" selected>CWC Malaprabha Flood Inundation Hazard</option>
+                    <option value="land_use">ISRO Bhuvan LULC (Agricultural Parcels)</option>
+                    <option value="settlements">Census 2021 Habitations & Settlements</option>
+                    <option value="scenario_a">Route A: Direct Corridor Line</option>
+                    <option value="scenario_b">Route B: Shifted Bypass Line</option>
+                  </select>
+                </div>
+                <div class="field-wrap-btn">
+                  <button class="btn btn-emerald" onclick="runDatasetCorrelation()">Run Cross-Analysis</button>
+                </div>
+              </div>
+
+              <!-- Live Correlation Result Box -->
+              <div class="correlation-results-box" id="corr-results-container">
+                <!-- Rendered by researcher.js -->
+              </div>
+            </div>
+
+            <!-- Existing Research Linkages -->
+            <div class="lineage-tag" style="margin-top:20px;">LINKED EMPIRICAL CITATIONS</div>
+            <div class="clean-res-card" style="margin-top:8px;">
+              <div class="clean-res-title">📄 Hydrological Embankment Severance in Krishna River Basin</div>
+              <div class="clean-res-author">By Dr. Ananth Murthy (2024) • IISc Bangalore</div>
+              <p style="font-size:12px; color:#4b5563; margin-top:4px;">
+                "HEC-RAS 2D analysis validates that the co-occurrence of active floodplains with high-yield alluvial agriculture creates severe backwater damming unless minimum 4.2m elevated spans are integrated."
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Publish Finding -->
         <div class="sub-view-pane" id="res-tab-publish">
           <div class="publish-full-stage">
             <div class="stage-header">
@@ -361,7 +488,11 @@
         <div class="rail-header">COMMUNITY PORTAL</div>
         <button class="rail-btn active" data-target="cit-tab-land" onclick="switchSubTab('citizen', 'cit-tab-land', this)">
           <span class="rail-icon">🌾</span>
-          <span class="rail-text">My Land & Village</span>
+          <span class="rail-text">My Land Records</span>
+        </button>
+        <button class="rail-btn" data-target="cit-tab-docs" onclick="switchSubTab('citizen', 'cit-tab-docs', this)">
+          <span class="rail-icon">🏛️</span>
+          <span class="rail-text">Document Offices</span>
         </button>
         <button class="rail-btn" data-target="cit-tab-feedback" onclick="switchSubTab('citizen', 'cit-tab-feedback', this)">
           <span class="rail-icon">📍</span>
@@ -375,14 +506,14 @@
 
       <div class="sub-content-stage">
         
-        <!-- Tab 1: My Land & Village Impact (Rich Cadastral Details + Satellite Map) -->
+        <!-- Tab 1: My Land Records & Village Center (Focused on their own land, not routes) -->
         <div class="sub-view-pane active" id="cit-tab-land">
           <div class="citizen-layout-split">
             
             <!-- Left: Citizen Satellite Map -->
             <div class="citizen-map-column">
               <div class="card-bar">
-                <span class="card-title">Highway Alignment Satellite View</span>
+                <span class="card-title">Cadastral Field Satellite View</span>
                 <div class="map-style-toggle">
                   <button class="basemap-pill active" id="btn-satellite-cit" onclick="setBasemap('satellite', 'cit')">🛰️ Satellite</button>
                   <button class="basemap-pill" id="btn-street-cit" onclick="setBasemap('street', 'cit')">🗺️ Street</button>
@@ -394,16 +525,15 @@
             <!-- Right: Rich Land Parcel & Village Inspector -->
             <div class="citizen-details-column">
               
-              <!-- Parcel Selector -->
               <div class="parcel-card">
-                <span class="tag-emerald">CADASTRAL LAND PARCEL INSPECTOR</span>
-                <h3>Select Your Land Parcel / Village</h3>
-                <p class="text-sm-muted">Choose your survey number to see complete ownership, crop, canal, and compensation details.</p>
+                <span class="tag-emerald">MY LAND RECORD & PARCEL PROFILE</span>
+                <h3>Cadastral Land Record Inspector</h3>
+                <p class="text-sm-muted">Inspect official records for your survey number, crop classifications, irrigation canal feeds, and statutory compensation status.</p>
 
                 <select id="citizen-parcel-select" class="clean-select" onchange="onSelectParcel(this.value)">
                   <option value="PARCEL-101" selected>Sy. No. 142/2A — Basappa Ningappa Patil (MK Hubballi)</option>
-                  <option value="PARCEL-102">Sy. No. 88/B — Ramesh Talwar (Deshnur Village)</option>
-                  <option value="PARCEL-103">Sy. No. 45/1 — Shivanand Gowda (Kittur Outskirts)</option>
+                  <option value="PARCEL-102">Sy. No. 88/B — Ramesh Chennappa Talwar (Deshnur)</option>
+                  <option value="PARCEL-103">Sy. No. 45/1 — Shivanandappa Gowda (Kittur)</option>
                   <option value="PARCEL-104">Sy. No. 112/3 — Parvati Bai Patil (Sampgaon Cluster)</option>
                   <option value="PARCEL-105">Sy. No. 71/C — Mallikarjunappa (Kalloli Plateau)</option>
                 </select>
@@ -413,9 +543,14 @@
                   <!-- Rendered dynamically by citizen.js -->
                 </div>
 
-                <button class="btn btn-emerald full-btn" onclick="flagParcelConcern()">
-                  📍 Report an Issue with My Parcel →
-                </button>
+                <div class="parcel-btn-row">
+                  <button class="btn btn-emerald" onclick="flagParcelConcern()">
+                    📍 Report an Issue with My Parcel
+                  </button>
+                  <button class="btn btn-beige" onclick="switchSubTab('citizen', 'cit-tab-docs')">
+                    🏛️ Where to Collect Original Hardcopies →
+                  </button>
+                </div>
               </div>
 
             </div>
@@ -423,7 +558,23 @@
           </div>
         </div>
 
-        <!-- Tab 2: Submit Ground Concern (Full View Form) -->
+        <!-- Tab 2: Original Hardcopy & Land Document Office Locator (New Feature!) -->
+        <div class="sub-view-pane" id="cit-tab-docs">
+          <div class="feedback-full-stage">
+            <div class="stage-header">
+              <div>
+                <h2>Original Hardcopy Document Retrieval Directory</h2>
+                <p>Land governance records are distributed across different government departments. Here is exactly where to collect physical, stamped original copies in Bailhongal Taluk.</p>
+              </div>
+            </div>
+
+            <div class="doc-directory-grid" id="doc-directory-container">
+              <!-- Rendered by citizen.js from API /api/citizen/document-offices -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Submit Ground Concern -->
         <div class="sub-view-pane" id="cit-tab-feedback">
           <div class="feedback-full-stage">
             <div class="stage-header">
@@ -466,7 +617,7 @@
           </div>
         </div>
 
-        <!-- Tab 3: Community Observations Feed (Full View) -->
+        <!-- Tab 4: Community Observations Feed -->
         <div class="sub-view-pane" id="cit-tab-feed">
           <div class="feed-full-stage">
             <div class="stage-header">
