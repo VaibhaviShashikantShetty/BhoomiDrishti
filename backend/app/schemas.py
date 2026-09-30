@@ -8,7 +8,14 @@ from typing import List, Dict, Any, Optional
 class SpatialAnalysisRequest(BaseModel):
     scenario_id: str = "A"
     buffer_meters: float = 60.0
+    viaduct_percentage: float = 0.0
+    floodplain_setback_meters: float = 0.0
+    compensation_multiplier: float = 2.0
     custom_geojson: Optional[Dict[str, Any]] = None
+
+class CrossDatasetAnalysisRequest(BaseModel):
+    layer_a: str = "land_use"
+    layer_b: str = "flood_hazard"
 
 class ResearchFindingCreate(BaseModel):
     title: str
