@@ -1,9 +1,15 @@
-# Sensitive and local generator files
+# Sensitive, report, and local generator files
 *.pdf
 BhoomiDrishti_Project_Report.pdf
 generate_pdf_report.py
 test_api.py
 create_commits.py
+*.pptx
+generate_ppt.py
+presentation_viewer.html
+slide_images/
+
+# Environment & database
 .env
 *.db
 *.sqlite3
