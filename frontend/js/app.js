@@ -14,10 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 2000);
 
-  // 2. Initialize default maps and data
+  // 2. Initialize default maps, simulation, and data
   initMaps();
   loadResearcherCards();
   loadCitizenMiniFeed();
+  if (typeof onSimParamChange === 'function') {
+    onSimParamChange();
+  }
+  if (typeof runDatasetCorrelation === 'function') {
+    runDatasetCorrelation();
+  }
   if (typeof initCitizenParcelInspector === 'function') {
     initCitizenParcelInspector();
   }

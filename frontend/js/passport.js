@@ -11,6 +11,15 @@ function renderPassportContent() {
   const today = new Date().toISOString().split('T')[0];
   const hash = `SHA256:BD-2026-TB-${Date.now().toString(16).toUpperCase()}`;
 
+  const sim = window.lastSimulatedAnalysis;
+  const agriVal = sim ? `${sim.agricultural_area_affected_ha.toFixed(1)} ha` : (isB ? '27 ha' : '138 ha');
+  const floodVal = sim ? `${sim.flood_sensitive_area_ha.toFixed(1)} ha (${sim.flood_risk_level || 'Evaluated'})` : (isB ? '0 ha (Zero risk)' : '95 ha (High flood zone)');
+  const homesVal = sim ? `~${sim.projected_households_displaced} Families (${sim.settlements_affected_count} Habitations)` : (isB ? '~8 Families' : '~42 Families');
+  const fin = sim && sim.financial_estimates ? sim.financial_estimates : {};
+  const costVal = fin.total_estimated_cost_cr ? `₹ ${fin.total_estimated_cost_cr} Cr` : (isB ? '₹ 596 Cr' : '₹ 628 Cr');
+  const simParamsNote = window.currentSimState ? 
+    `Simulated with RoW: ${window.currentSimState.buffer_meters}m, Viaduct: ${window.currentSimState.viaduct_percentage}%, Setback: ${window.currentSimState.floodplain_setback_meters}m, Comp: ${window.currentSimState.compensation_multiplier}x` : '';
+
   container.innerHTML = `
     <div class="passport-document-clean">
       
@@ -18,6 +27,7 @@ function renderPassportContent() {
         <div class="pcp-clean-title">
           <h2>Policy Consequence Passport</h2>
           <p>National Land Governance & Highway Decision Brief • Team ThunderBolt</p>
+          ${simParamsNote ? `<span style="font-size:10px; color:#2e7d32; font-weight:700;">⚙️ ${simParamsNote}</span>` : ''}
         </div>
         <div class="pcp-clean-docid">
           DOC: PCP-2026-KA08<br>
@@ -58,25 +68,25 @@ function renderPassportContent() {
           <tbody>
             <tr>
               <td><strong>Fertile Farmland</strong></td>
-              <td>${isB ? '27 ha (Saves 111 ha)' : '138 ha (High loss)'}</td>
+              <td>${agriVal}</td>
               <td>Derived (GIS intersection)</td>
               <td>ISRO Bhuvan LULC (2024-25)</td>
             </tr>
             <tr>
               <td><strong>Flood Inundation Risk</strong></td>
-              <td>${isB ? '0 ha (Zero risk)' : '95 ha (High flood zone)'}</td>
+              <td>${floodVal}</td>
               <td>Observed & Derived</td>
               <td>Central Water Commission (CWC 2023)</td>
             </tr>
             <tr>
               <td><strong>Displaced Households</strong></td>
-              <td>${isB ? '~8 Families' : '~42 Families'}</td>
+              <td>${homesVal}</td>
               <td>Estimated Model</td>
               <td>Census of India 2021 Projections</td>
             </tr>
             <tr>
-              <td><strong>Corridor Length & Cost</strong></td>
-              <td>${isB ? '38.6 km (₹ 596 Cr)' : '34.8 km (₹ 628 Cr)'}</td>
+              <td><strong>Corridor Outlay & Capex</strong></td>
+              <td>${costVal}</td>
               <td>Estimated</td>
               <td>PWD Schedule of Rates 2025-26</td>
             </tr>
