@@ -19,6 +19,7 @@ from .spatial import spatial_engine, load_geojson_layer
 from .ai_service import ai_engine
 from .schemas import (
     SpatialAnalysisRequest,
+    CrossDatasetAnalysisRequest,
     ResearchFindingCreate,
     CitizenObservationCreate,
     CitizenObservationVerify,
@@ -114,17 +115,84 @@ def analyze_spatial_impact(req: SpatialAnalysisRequest):
     """
     Executes live deterministic geospatial intersection using Shapely & PyProj.
     Calculates agricultural area, flood plain intersection, settlements influenced,
-    and attaches Evidence Lineage for every indicator.
+    and supports interactive policy simulation (RoW width, viaduct ratio, setback, compensation).
     """
     try:
         result = spatial_engine.analyze_corridor(
             scenario_id=req.scenario_id,
             buffer_meters=req.buffer_meters,
+            viaduct_percentage=req.viaduct_percentage,
+            floodplain_setback_meters=req.floodplain_setback_meters,
+            compensation_multiplier=req.compensation_multiplier,
             custom_geometry_geojson=req.custom_geojson
         )
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Spatial calculation error: {str(e)}")
+
+@app.post("/api/research/cross-analysis")
+def compute_cross_dataset_analysis(req: CrossDatasetAnalysisRequest):
+    """
+    Computes spatial co-occurrence, intersection area, and Jaccard overlap index
+    between two authoritative datasets for empirical research.
+    """
+    try:
+        return spatial_engine.compute_cross_dataset_correlation(req.layer_a, req.layer_b)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Cross-dataset analysis error: {str(e)}")
+
+@app.get("/api/citizen/document-offices")
+def get_citizen_document_offices():
+    """
+    Returns official directory of physical offices for retrieving original land record hardcopies.
+    Addresses information fragmentation for rural landowners.
+    """
+    return [
+        {
+            "document_name": "RTC / Pahani (Record of Rights, Tenancy and Crops)",
+            "description": "Statutory legal proof of land ownership, cultivator name, survey number, soil classification, water source, and current standing crops.",
+            "office_name": "Atalji Janasnehi / Nemmadi Kendra (MK Hubballi)",
+            "address": "Opposite Gram Panchayat Office, Market Road, Mugatkhan Hubballi - 591153",
+            "counter": "Counter No. 3 (Bhoomi Revenue Services)",
+            "timings": "Monday - Saturday: 10:00 AM - 5:30 PM (Closed 2nd/4th Saturdays & Sundays)",
+            "statutory_fee": "₹15 per digitally signed copy",
+            "required_documents": ["Aadhaar Card", "Survey Number or Previous RTC / Khata Extract"],
+            "helpline": "+91 8288-223410 / Toll-Free 1902"
+        },
+        {
+            "document_name": "Tippan & Form 11E Survey Sketch",
+            "description": "Original cadastral field measurement sketch (FMB) showing exact physical boundaries, guntas, and neighbor demarcations.",
+            "office_name": "Assistant Director of Land Records (ADLR) Taluk Survey Office",
+            "address": "Room 14, 1st Floor, Mini Vidhana Soudha, Court Road, Bailhongal - 591102",
+            "counter": "Mojini 3.0 Citizen Service Counter",
+            "timings": "Monday - Saturday: 10:30 AM - 4:30 PM",
+            "statutory_fee": "₹35 per certified certified A3 sketch copy",
+            "required_documents": ["RTC of current year", "Aadhaar Card", "Application Form 11E"],
+            "helpline": "+91 8288-232145"
+        },
+        {
+            "document_name": "Mutation Extract (Form 21 / Vamshavruksha)",
+            "description": "Complete chronological history of ownership transfer, inheritance partitions, court orders, or sale transactions.",
+            "office_name": "Village Administrative Officer (VAO) & Revenue Inspector Circle",
+            "address": "Deshnur Nada Kacheri / Gram Panchayat Office, Deshnur - 591147",
+            "counter": "Revenue Inspector Section",
+            "timings": "Tuesday & Friday (Field Camp Days): 11:00 AM - 4:00 PM",
+            "statutory_fee": "₹20 per certified register copy",
+            "required_documents": ["Death Certificate (if inheritance)", "Genealogical Tree / Vamshavruksha Certificate", "Original Sale Deed"],
+            "helpline": "+91 8288-245678"
+        },
+        {
+            "document_name": "Encumbrance Certificate (EC Form 15 / Form 16) & Registered Sale Deed",
+            "description": "Certified record of any registered mortgages, bank liens, legal attachments, or encumbrances over a 30-year search period.",
+            "office_name": "Senior Sub-Registrar Office (Kaveri 2.0 Registration Center)",
+            "address": "Taluk Administrative Complex, Near Civil Court, Bailhongal - 591102",
+            "counter": "Kaveri 2.0 Delivery Window 2",
+            "timings": "Monday - Saturday: 10:00 AM - 5:00 PM",
+            "statutory_fee": "₹100 for 15-year search / ₹180 for 30-year search",
+            "required_documents": ["Property Khata / Assessment Number", "Valid Photo ID", "Previous Registration Document Number (if known)"],
+            "helpline": "+91 8288-231189"
+        }
+    ]
 
 @app.get("/api/spatial/compare")
 def compare_scenarios(buffer_meters: float = 60.0):
